@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoGroup", "PhotoGroup\Ph
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoGroup.Tests", "PhotoGroup.Tests\PhotoGroup.Tests.csproj", "{F959146C-E1CF-42F4-B239-1C52FA91E9EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoGroup.Data", "PhotoGroup.Data\PhotoGroup.Data.csproj", "{44075AC1-1AA8-4E39-9242-1F51847271F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F959146C-E1CF-42F4-B239-1C52FA91E9EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F959146C-E1CF-42F4-B239-1C52FA91E9EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F959146C-E1CF-42F4-B239-1C52FA91E9EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44075AC1-1AA8-4E39-9242-1F51847271F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44075AC1-1AA8-4E39-9242-1F51847271F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44075AC1-1AA8-4E39-9242-1F51847271F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44075AC1-1AA8-4E39-9242-1F51847271F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

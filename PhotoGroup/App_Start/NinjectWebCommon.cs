@@ -1,3 +1,7 @@
+using System.Web.Http;
+using PhotoGroup.Data;
+using WebApiContrib.IoC.Ninject;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(PhotoGroup.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(PhotoGroup.App_Start.NinjectWebCommon), "Stop")]
 
@@ -45,6 +49,9 @@ namespace PhotoGroup.App_Start
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
+				// Support WebAPI
+				GlobalConfiguration.Configuration.DependencyResolver = new NinjectResolver(kernel);
+
                 RegisterServices(kernel);
                 return kernel;
             }
@@ -61,6 +68,8 @@ namespace PhotoGroup.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+			kernel.Bind<IPhotosRepository>().To<PhotosRepository>();
+			kernel.Bind<PhotosContext>().To<PhotosContext>();
         }        
     }
 }
