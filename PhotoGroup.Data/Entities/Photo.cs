@@ -17,5 +17,6 @@ namespace PhotoGroup.Data.Entities
 
 		public string Title { get; set; }
 
+		public int UploaderId { get; set; }
 	}
 }

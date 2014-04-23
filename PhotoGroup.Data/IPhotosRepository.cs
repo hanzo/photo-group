@@ -10,5 +10,6 @@ namespace PhotoGroup.Data
     public interface IPhotosRepository
     {
 	    Photo GetPhoto(int id);
+	    IQueryable<Photo> GetAllPhotosForUser(int userId);
     }
 }

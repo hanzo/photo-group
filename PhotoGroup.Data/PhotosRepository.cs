@@ -13,5 +13,14 @@ namespace PhotoGroup.Data
 		{
 			return new Photo {Id = 1, Title = "ski photo 1"};
 		}
+
+		public IQueryable<Photo> GetAllPhotosForUser(int userId)
+		{
+			return new List<Photo>
+			{
+				new Photo {Id = 1, Title = "ski photo 1"},
+				new Photo {Id = 2, Title = "ski photo 2"}
+			}.AsQueryable();
+		}
 	}
 }
