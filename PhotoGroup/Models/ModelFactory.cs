@@ -10,13 +10,24 @@ namespace PhotoGroup.Models
 {
 	public class ModelFactory
 	{
+		private UrlHelper _urlHelper;
+
+		public ModelFactory(HttpRequestMessage message)
+		{
+			_urlHelper = new UrlHelper(message);
+		}
+
 		public PhotoModel Create(Photo photo)
 		{
+			if (photo == null)
+				return null;
+
 			return new PhotoModel
 			{
 				Id = photo.Id,
 				Title = photo.Title,
-				UploaderId = photo.UploaderId
+				UploaderId = photo.UploaderId,
+				Url = _urlHelper.Link("Photo", new { id = photo.Id })
 			};
 		}
 	}

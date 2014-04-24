@@ -12,29 +12,29 @@ using PhotoGroup.Models;
 
 namespace PhotoGroup.Controllers
 {
-    public class PhotosController : ApiController
+    public class PhotosController : BaseApiController
     {
-	    private IPhotoGroupRepository _repo;
-	    private ModelFactory _modelFactory;
-
-	    public PhotosController(IPhotoGroupRepository repo)
+	    public PhotosController(IPhotoGroupRepository repo) : base(repo)
 	    {
-		    _repo = repo;
-		    _modelFactory = new ModelFactory();
 	    }		
 
 	    public IEnumerable<PhotoModel> Get()
 	    {
-			return _repo.GetAllPhotos()
+			return TheRepository.GetAllPhotos()
 				.ToList()
-				.Select(f => _modelFactory.Create(f));
+				.Select(f => TheModelFactory.Create(f));
 	    }
 
-		public IEnumerable<PhotoModel> Get(int id)
-		{
-			return _repo.GetAllPhotosForUser(id)
-				.ToList()
-				.Select(f => _modelFactory.Create(f));
-		}
+	    public PhotoModel Get(int id)
+	    {
+		    return TheModelFactory.Create(TheRepository.GetPhoto(id));
+	    }
+
+		//public IEnumerable<PhotoModel> Get(int id)
+		//{
+		//	return TheRepository.GetAllPhotosForUser(id)
+		//		.ToList()
+		//		.Select(f => TheModelFactory.Create(f));
+		//}
     }
 }
