@@ -11,6 +11,8 @@ namespace PhotoGroup.Models
 
 		public string Title { get; set; }
 
-		//public int UploaderId { get; set; }
+		public int UploaderId { get; set; }
+
+		//public string Url { get; set; }
 	}
 }

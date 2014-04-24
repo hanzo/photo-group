@@ -12,9 +12,15 @@ namespace PhotoGroup
 		public static void Register(HttpConfiguration config)
 		{
 			config.Routes.MapHttpRoute(
-				name: "DefaultApi",
-				routeTemplate: "api/{controller}/{id}",
-				defaults: new { id = RouteParameter.Optional }
+				name: "Photo",
+				routeTemplate: "api/photos/{id}",
+				defaults: new { controller = "photos", id = RouteParameter.Optional }
+			);
+
+			config.Routes.MapHttpRoute(
+				name: "Album",
+				routeTemplate: "api/albums/{id}",
+				defaults: new { controller = "albums", id = RouteParameter.Optional }
 			);
 
 			// Uncomment the following line of code to enable query support for actions with an IQueryable or IQueryable<T> return type.

@@ -14,24 +14,27 @@ namespace PhotoGroup.Controllers
 {
     public class PhotosController : ApiController
     {
-	    private IPhotosRepository _repo;
+	    private IPhotoGroupRepository _repo;
 	    private ModelFactory _modelFactory;
 
-	    public PhotosController(IPhotosRepository repo)
+	    public PhotosController(IPhotoGroupRepository repo)
 	    {
 		    _repo = repo;
 		    _modelFactory = new ModelFactory();
-	    }
+	    }		
 
-		public IEnumerable<Photo> Get()
-		{
-			return Enumerable.Repeat(_repo.GetPhoto(1), 1);
-		}
-
-	    public IEnumerable<PhotoModel> Get(string id)
+	    public IEnumerable<PhotoModel> Get()
 	    {
-			return _repo.GetAllPhotosForUser(Convert.ToInt32(id))
+			return _repo.GetAllPhotos()
+				.ToList()
 				.Select(f => _modelFactory.Create(f));
 	    }
+
+		public IEnumerable<PhotoModel> Get(int id)
+		{
+			return _repo.GetAllPhotosForUser(id)
+				.ToList()
+				.Select(f => _modelFactory.Create(f));
+		}
     }
 }

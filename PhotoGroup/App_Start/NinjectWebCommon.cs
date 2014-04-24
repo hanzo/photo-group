@@ -68,8 +68,8 @@ namespace PhotoGroup.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-			kernel.Bind<IPhotosRepository>().To<PhotosRepository>();
-			kernel.Bind<PhotosContext>().To<PhotosContext>();
+			kernel.Bind<IPhotoGroupRepository>().To<PhotoGroupRepository>();
+			kernel.Bind<PhotoGroupContext>().To<PhotoGroupContext>();
         }        
     }
 }
