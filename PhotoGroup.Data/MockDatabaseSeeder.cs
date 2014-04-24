@@ -1,4 +1,7 @@
-﻿using System;
+﻿//#define TEST_SEED
+//#define FORCE_RECREATE
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,18 +29,40 @@ namespace PhotoGroup.Data
 
 		public void Seed()
 		{
-			//ExecuteQueries(
-			//	"DELETE FROM Albums",
-			//	"DELETE FROM Photos"
-			//  );
-
-			if (_ctx.Photos.Count() > 0)
+#if !(TEST_SEED || FORCE_RECREATE)
+			if (_ctx.Users.Count() > 0)
 			{
 				return;
 			}
+#endif
 
+#if TEST_SEED || FORCE_RECREATE
+      ExecuteQueries(
+        "DELETE FROM Users",
+        "DELETE FROM Albums",
+        "DELETE FROM Photos"
+      );
+#endif
+
+			SeedUsers();
 			SeedAlbums();
 			SeedPhotos();
+		}
+
+		private void SeedUsers()
+		{
+			var users = new List<User>
+			{
+				new User { Id = 1, FirstName = "Hans", LastName = "Werner"},
+				new User { Id = 2, FirstName = "Joe", LastName = "Shmo"},
+				new User { Id = 3, FirstName = "Rolo", LastName = "Tony"},
+			};
+
+			foreach (var user in users)
+			{
+				_ctx.Users.Add(user);
+			}
+			_ctx.SaveChanges();
 		}
 
 		private void SeedAlbums()

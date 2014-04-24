@@ -18,18 +18,22 @@ namespace PhotoGroup.Data
 
 		static PhotoGroupContext()
 		{
-			//Database.SetInitializer(new MigrateDatabaseToLatestVersion<PhotoGroupContext, PhotoGroupMigrationConfiguration>());
+			Database.SetInitializer(new MigrateDatabaseToLatestVersion<PhotoGroupContext, PhotoGroupMigrationConfiguration>());
 		}
 
-		//protected override void OnModelCreating(DbModelBuilder modelBuilder)
-		//{
-		//	base.OnModelCreating(modelBuilder);
+		protected override void OnModelCreating(DbModelBuilder modelBuilder)
+		{
+			//base.OnModelCreating(modelBuilder);
 
-		//	CountingKsMapping.Configure(modelBuilder);
-		//}
+			//CountingKsMapping.Configure(modelBuilder);
+
+			//Database.SetInitializer<PhotoGroupContext>(null);
+		}
 
 		public DbSet<Photo> Photos { get; set; }
 
 		public DbSet<Album> Albums { get; set; }
+
+		public DbSet<User> Users { get; set; }
 	}
 }

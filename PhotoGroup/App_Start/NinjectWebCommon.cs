@@ -1,5 +1,6 @@
 using System.Web.Http;
 using PhotoGroup.Data;
+using PhotoGroup.Services;
 using WebApiContrib.IoC.Ninject;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(PhotoGroup.App_Start.NinjectWebCommon), "Start")]
@@ -70,6 +71,7 @@ namespace PhotoGroup.App_Start
         {
 			kernel.Bind<IPhotoGroupRepository>().To<PhotoGroupRepository>();
 			kernel.Bind<PhotoGroupContext>().To<PhotoGroupContext>();
+	        kernel.Bind<IPhotoGroupIdentityService>().To<PhotoGroupIdentityService>();
         }        
     }
 }

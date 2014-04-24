@@ -52,6 +52,7 @@
     <Compile Include="IPhotoGroupRepository.cs" />
     <Compile Include="MockDatabaseSeeder.cs" />
     <Compile Include="PhotoGroupContext.cs" />
+    <Compile Include="PhotoGroupMigrationConfiguration.cs" />
     <Compile Include="PhotoGroupRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

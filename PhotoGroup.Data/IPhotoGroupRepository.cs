@@ -12,5 +12,8 @@ namespace PhotoGroup.Data
 	    Photo GetPhoto(int id);
 	    IQueryable<Photo> GetAllPhotosForUser(int userId);
 		IQueryable<Photo> GetAllPhotos();
+	    IQueryable<Album> GetAlbumsForUser(int userId);
+	    User GetUserInfo(int id);
+	    IQueryable<User> GetAllUsers();
     }
 }

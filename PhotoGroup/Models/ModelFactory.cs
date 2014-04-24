@@ -27,7 +27,19 @@ namespace PhotoGroup.Models
 				Id = photo.Id,
 				Title = photo.Title,
 				UploaderId = photo.UploaderId,
-				Url = _urlHelper.Link("Photo", new { id = photo.Id })
+				Url = _urlHelper.Link("Photos", new { id = photo.Id })
+			};
+		}
+
+		public UserModel Create(User user)
+		{
+			if (user == null)
+				return null;
+
+			return new UserModel
+			{
+				Id = user.Id,
+				Name = String.Format("{0} {1}", user.FirstName, user.LastName)
 			};
 		}
 	}
