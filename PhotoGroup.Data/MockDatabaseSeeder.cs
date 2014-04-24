@@ -29,20 +29,20 @@ namespace PhotoGroup.Data
 
 		public void Seed()
 		{
-#if !(TEST_SEED || FORCE_RECREATE)
+//#if !(TEST_SEED || FORCE_RECREATE)
 			if (_ctx.Users.Count() > 0)
 			{
 				return;
 			}
-#endif
+//#endif
 
-#if TEST_SEED || FORCE_RECREATE
+//#if TEST_SEED || FORCE_RECREATE
       ExecuteQueries(
         "DELETE FROM Users",
         "DELETE FROM Albums",
         "DELETE FROM Photos"
       );
-#endif
+//#endif
 
 			SeedUsers();
 			SeedAlbums();
@@ -67,10 +67,17 @@ namespace PhotoGroup.Data
 
 		private void SeedAlbums()
 		{
-			var album1 = new Album { Id = 1, CreatorId = 1, CreatedDateTime = new DateTime(2014, 4, 23, 12, 30, 0) };
+			var albums = new List<Album>
+			{
+				new Album { Id = 1, CreatorId = 1, CreatedDateTime = new DateTime(2014, 4, 23, 12, 30, 0) },
+				new Album { Id = 2, CreatorId = 2, CreatedDateTime = new DateTime(2014, 4, 21, 12, 30, 0) },
+				new Album { Id = 3, CreatorId = 1, CreatedDateTime = new DateTime(2014, 3, 21, 12, 30, 0) },
+			};
 
-			_ctx.Albums.Add(album1);
-
+			foreach (var album in albums)
+			{
+				_ctx.Albums.Add(album);
+			}
 			_ctx.SaveChanges();
 		}
 
@@ -78,9 +85,9 @@ namespace PhotoGroup.Data
 		{
 			var photos = new List<Photo>
 			{
-				new Photo { Id = 1, UploaderId = 1, Title = "ski photo 1, user 1"},
-				new Photo { Id = 2, UploaderId = 2, Title = "ski photo 2, user 2" },
-				new Photo { Id = 3, UploaderId = 1, Title = "ski photo 3, user 1" },
+				new Photo { Id = 1, CreatorId = 1, Title = "ski photo 1, user 1"},
+				new Photo { Id = 2, CreatorId = 2, Title = "ski photo 2, user 2" },
+				new Photo { Id = 3, CreatorId = 1, Title = "ski photo 3, user 1" },
 			};
 
 			foreach (var photo in photos)

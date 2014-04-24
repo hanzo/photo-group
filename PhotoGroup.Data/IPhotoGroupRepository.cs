@@ -13,6 +13,7 @@ namespace PhotoGroup.Data
 	    IQueryable<Photo> GetAllPhotosForUser(int userId);
 		IQueryable<Photo> GetAllPhotos();
 	    IQueryable<Album> GetAlbumsForUser(int userId);
+	    Album GetAlbum(int id);
 	    User GetUserInfo(int id);
 	    IQueryable<User> GetAllUsers();
     }

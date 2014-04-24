@@ -26,8 +26,8 @@ namespace PhotoGroup.Models
 			{
 				Id = photo.Id,
 				Title = photo.Title,
-				UploaderId = photo.UploaderId,
-				Url = _urlHelper.Link("Photos", new { id = photo.Id })
+				UploaderId = photo.CreatorId,
+				Url = _urlHelper.Link("Photos", new {id = photo.Id})
 			};
 		}
 
@@ -40,6 +40,20 @@ namespace PhotoGroup.Models
 			{
 				Id = user.Id,
 				Name = String.Format("{0} {1}", user.FirstName, user.LastName)
+			};
+		}
+
+		public AlbumModel Create(Album album)
+		{
+			if (album == null)
+				return null;
+
+			return new AlbumModel
+			{
+				Id = album.Id,
+				CreatorId = album.CreatorId,
+				CreatedDateTime = album.CreatedDateTime,
+				Url = _urlHelper.Link("Albums", new { id = album.Id })
 			};
 		}
 	}

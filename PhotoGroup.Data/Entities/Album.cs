@@ -13,6 +13,5 @@ namespace PhotoGroup.Data.Entities
 		public int CreatorId { get; set; }
 
 		public DateTime CreatedDateTime { get; set; }
-
 	}
 }
