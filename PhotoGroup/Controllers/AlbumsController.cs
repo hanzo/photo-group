@@ -46,6 +46,7 @@ namespace PhotoGroup.Controllers
 			return results;
 		}
 
+		//public PhotoGroupActionResult Post([FromBody] AlbumModel model)
 	    public HttpResponseMessage Post([FromBody] AlbumModel model)
 	    {
 		    try
@@ -63,6 +64,7 @@ namespace PhotoGroup.Controllers
 			    if (TheRepository.SaveAll())
 			    {
 					return Request.CreateResponse(HttpStatusCode.Created, TheModelFactory.Create(entity));
+				    //return new PhotoGroupActionResult(Request);
 			    }
 			    else
 			    {
