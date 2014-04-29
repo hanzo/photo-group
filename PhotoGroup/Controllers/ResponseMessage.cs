@@ -23,7 +23,7 @@ namespace PhotoGroup.Controllers
 		public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
 		{
 			var response = _request.CreateResponse(HttpStatusCode.Created);
-			response.Headers.Location = new Uri("www.foo.com");
+			response.Headers.Location = new Uri("http://www.foo.com");
 			return Task.FromResult(response);
 		}
 	}

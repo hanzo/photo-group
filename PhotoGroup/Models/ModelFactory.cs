@@ -70,7 +70,7 @@ namespace PhotoGroup.Models
 			{
 				var album = new Album();
 
-				if (model.Title != default(string))
+				if (!string.IsNullOrWhiteSpace(model.Title))
 				{
 					album.Title = model.Title;
 				}

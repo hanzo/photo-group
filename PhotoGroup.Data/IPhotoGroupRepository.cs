@@ -19,6 +19,6 @@ namespace PhotoGroup.Data
 	    User GetUserInfo(int id);
 	    IQueryable<User> GetAllUsers();
 	    bool Insert(Album album);
-	    
+	    bool DeleteAlbum(int id);
     }
 }
