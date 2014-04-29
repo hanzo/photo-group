@@ -18,7 +18,8 @@ namespace PhotoGroup.Data
 
 		static PhotoGroupContext()
 		{
-			Database.SetInitializer(new MigrateDatabaseToLatestVersion<PhotoGroupContext, PhotoGroupMigrationConfiguration>());
+			//Database.SetInitializer(new MigrateDatabaseToLatestVersion<PhotoGroupContext, PhotoGroupMigrationConfiguration>());
+			Database.SetInitializer(new DropCreateDatabaseAlways<PhotoGroupContext>());
 		}
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)

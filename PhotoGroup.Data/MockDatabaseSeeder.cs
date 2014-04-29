@@ -37,18 +37,19 @@ namespace PhotoGroup.Data
 //#endif
 
 //#if TEST_SEED || FORCE_RECREATE
-      ExecuteQueries(
-        "DELETE FROM Users",
-        "DELETE FROM Albums",
-        "DELETE FROM Photos"
-      );
+			  //ExecuteQueries(
+			  //  "DELETE FROM Users",
+			  //  "DELETE FROM Albums",
+			  //  "DELETE FROM Photos"
+			  //);
 //#endif
+
+			//ExecuteQueries("DROP TABLE Users, Photos, Albums");
 
 			SeedUsers();
 			SeedAlbums();
 			SeedPhotos();
 		}
-
 		private void SeedUsers()
 		{
 			var users = new List<User>
@@ -64,14 +65,21 @@ namespace PhotoGroup.Data
 			}
 			_ctx.SaveChanges();
 		}
-
+		
 		private void SeedAlbums()
 		{
 			var albums = new List<Album>
 			{
-				new Album { Id = 1, CreatorId = 1, CreatedDateTime = new DateTime(2014, 4, 23, 12, 30, 0) },
-				new Album { Id = 2, CreatorId = 2, CreatedDateTime = new DateTime(2014, 4, 21, 12, 30, 0) },
-				new Album { Id = 3, CreatorId = 1, CreatedDateTime = new DateTime(2014, 3, 21, 12, 30, 0) },
+				new Album
+				{
+					CreatorId = 1, 
+					CreatedDateTime = new DateTime(2014, 4, 23, 12, 30, 0), 
+				},
+				new Album
+				{
+					CreatorId = 1, 
+					CreatedDateTime = new DateTime(2014, 4, 21, 12, 30, 0), 
+				},
 			};
 
 			foreach (var album in albums)
@@ -80,21 +88,26 @@ namespace PhotoGroup.Data
 			}
 			_ctx.SaveChanges();
 		}
-
+		
 		private void SeedPhotos()
 		{
 			var photos = new List<Photo>
 			{
-				new Photo { Id = 1, CreatorId = 1, Title = "ski photo 1, user 1"},
-				new Photo { Id = 2, CreatorId = 2, Title = "ski photo 2, user 2" },
-				new Photo { Id = 3, CreatorId = 1, Title = "ski photo 3, user 1" },
+				new Photo { AlbumId = 1, CreatorId = 1, Title = "user 1"},
+				new Photo { AlbumId = 1, CreatorId = 1, Title = "user 1" },
+				new Photo { AlbumId = 1, CreatorId = 2, Title = "user 2" },
+				new Photo { AlbumId = 2, CreatorId = 2, Title = "user 2"},
+				new Photo { AlbumId = 2, CreatorId = 2, Title = "user 2" },
+				new Photo { AlbumId = 2, CreatorId = 3, Title = "user 3" },
 			};
 
 			foreach (var photo in photos)
 			{
 				_ctx.Photos.Add(photo);
 			}
+
 			_ctx.SaveChanges();
 		}
+
 	}
 }

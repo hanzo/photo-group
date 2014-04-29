@@ -12,6 +12,12 @@ namespace PhotoGroup.Data.Entities
 
 		public int CreatorId { get; set; }
 
+		public string Title { get; set; }
+
 		public DateTime CreatedDateTime { get; set; }
+
+		public ICollection<Photo> Photos { get; set; }
+
+		public ICollection<User> Attendees { get; set; }
 	}
 }

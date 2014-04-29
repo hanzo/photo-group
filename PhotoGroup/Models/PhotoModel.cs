@@ -13,6 +13,8 @@ namespace PhotoGroup.Models
 
 		public int UploaderId { get; set; }
 
+		public int AlbumId { get; set; }
+
 		public string Url { get; set; }
 	}
 }

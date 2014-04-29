@@ -45,5 +45,34 @@ namespace PhotoGroup.Controllers
 				.Select(a => TheModelFactory.Create(a));
 			return results;
 		}
+
+	    public HttpResponseMessage Post([FromBody] AlbumModel model)
+	    {
+		    try
+		    {
+			    var entity = TheModelFactory.Parse(model);
+
+			    if (entity == null)
+				    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Invalid album defined in body.");
+
+				// is this the right place to do this? 
+				entity.CreatorId = _identityService.CurrentUser;
+
+			    TheRepository.Insert(entity);
+
+			    if (TheRepository.SaveAll())
+			    {
+					return Request.CreateResponse(HttpStatusCode.Created, TheModelFactory.Create(entity));
+			    }
+			    else
+			    {
+					return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Could not save to the database.");
+				}
+		    }
+		    catch (Exception ex)
+		    {
+			    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Exception thrown while parsing.");
+		    }
+	    }
     }
 }

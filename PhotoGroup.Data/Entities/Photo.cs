@@ -13,5 +13,7 @@ namespace PhotoGroup.Data.Entities
 		public string Title { get; set; }
 
 		public int CreatorId { get; set; }
+
+		public int AlbumId { get; set; }
 	}
 }
