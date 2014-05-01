@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Routing;
 using PhotoGroup.Data;
 using PhotoGroup.Models;
 using PhotoGroup.Services;
@@ -13,6 +14,8 @@ namespace PhotoGroup.Controllers
     public class AlbumsController : BaseApiController
     {
 	    private IPhotoGroupIdentityService _identityService;
+
+	    private const int PAGE_SIZE = 1;
 
 	    public AlbumsController(IPhotoGroupRepository repo, IPhotoGroupIdentityService identityService) 
 			: base(repo)
@@ -35,6 +38,48 @@ namespace PhotoGroup.Controllers
 			}
 
 			return TheModelFactory.Create(album);
+		}
+
+		public object GetAlbumPhotos(int albumId, int page = 0)
+		{
+			var userId = _identityService.CurrentUser;
+			var album = TheRepository.GetAlbum(albumId);
+
+			if (album == null)
+				return null;
+
+			if (album.CreatorId != userId)
+			{
+				//TODO: log something about access rights
+				return null;
+			}
+
+			var baseQuery = TheRepository.GetPhotosForAlbum(albumId)
+				.OrderBy(p => p.PhotoDateTime);
+
+			var totalCount = baseQuery.Count();
+
+			// ensure we round up our page count to get the last partial page
+			var totalPages = Math.Ceiling((double) totalCount/PAGE_SIZE);
+
+			var results = baseQuery
+				.Skip(PAGE_SIZE * page)
+				.Take(PAGE_SIZE)
+				.ToList()
+				.Select(p => TheModelFactory.Create(p));
+
+			var urlHelper = new UrlHelper(Request);
+			var prevPageUrl = page > 0 ? urlHelper.Link("AlbumPhotos", new { page = page - 1 }) : "";
+			var nextPageUrl = page < totalPages - 1 ? urlHelper.Link("AlbumPhotos", new { page = page + 1 }) : "";
+
+			return new
+			{
+				TotalCount = totalCount,
+				TotalPages = totalPages,
+				PrevPageUrl = prevPageUrl,
+				NextPageUrl = nextPageUrl,
+				Results = results,
+			};
 		}
 
 		public IEnumerable<AlbumModel> Get()

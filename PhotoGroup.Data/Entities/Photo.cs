@@ -14,6 +14,10 @@ namespace PhotoGroup.Data.Entities
 
 		public int CreatorId { get; set; }
 
+		public DateTime UploadedDateTime { get; set; }
+
+		public DateTime PhotoDateTime { get; set; }
+
 		public int AlbumId { get; set; }
 	}
 }
