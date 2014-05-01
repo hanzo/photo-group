@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using PhotoGroup.ActionResults;
 using PhotoGroup.Data;
 using PhotoGroup.Models;
 
@@ -34,6 +35,11 @@ namespace PhotoGroup.Controllers
 			    }
 			    return _modelFactory;
 		    }
+	    }
+
+	    protected IHttpActionResult Versioned<T>(T body, string version = "V1") where T : class
+	    {
+		    return new VersionedActionResult<T>(Request, version, body);
 	    }
     }
 }
